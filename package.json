@@ -1,0 +1,19 @@
+{
+  "name": "kucc",
+  "version": "1.0.0",
+  "description": "The rebuilt KUCC website using Node.js + React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo nice"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YcleptJohn/kucc.git"
+  },
+  "author": "John Taylor, Tom Louch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YcleptJohn/kucc/issues"
+  },
+  "homepage": "https://github.com/YcleptJohn/kucc#readme"
+}
