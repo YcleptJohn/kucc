@@ -4,7 +4,8 @@
   "description": "The rebuilt KUCC website using Node.js + React",
   "main": "index.js",
   "scripts": {
-    "test": "echo nice"
+    "test": "echo nice",
+    "start": "node_modules/.bin/http-server ./dist/"
   },
   "repository": {
     "type": "git",
@@ -17,13 +18,15 @@
   },
   "homepage": "https://github.com/YcleptJohn/kucc#readme",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.38",
-    "@babel/preset-env": "^7.0.0-beta.38",
-    "babel-loader": "^8.0.0-beta.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0"
   },
   "dependencies": {
+    "http-server": "^0.11.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",

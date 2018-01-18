@@ -11,10 +11,11 @@ module.exports = {
  module: {
   loaders: [
     {
-      test: /\.js?/,
+      test: /\.jsx?/,
+      exclude: /node_modules/,
       loader: 'babel-loader',
       query: {
-        presets: ['env']
+        presets: ['env', 'react']
       }
     }
   ]
