@@ -6,6 +6,17 @@ const app = express()
 
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 
+app.route('/api/?*')
+  .get((req, res) => {
+    res.sendStatus(403)
+  })
+  .post((req, res) => {
+    res.sendStatus(403)
+  })
+  .put((req, res) => {
+    res.sendStatus(403)
+  })
+
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'))
 })
