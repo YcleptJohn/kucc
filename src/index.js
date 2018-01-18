@@ -1,15 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './containers/App'
+import { BrowserRouter } from 'react-router-dom'
 
-class App extends Component {
-  render() {
-    return ( 
-      <div>
-        Hello world
-      </div>
-    )
-  }
-}
-
-
-ReactDOM.render(<App />, document.querySelector('.appContainer'))
+ReactDOM.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+    , document.getElementById('appContainer'))
