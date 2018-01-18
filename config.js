@@ -10,7 +10,7 @@ configs['development'] = {
   SERVER_PORT: 5000 
 }
 
-configs['staging']= {}
+configs['staging'] = {}
 
 configs['production'] = {}
 
