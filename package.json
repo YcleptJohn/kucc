@@ -7,7 +7,8 @@
     "test": "echo nice",
     "start": "node src/server.js",
     "start:dev": "node_modules/.bin/webpack-dev-server --watch",
-    "build:less": "node_modules/.bin/lessc ./src/styles/all.less ./dist/all.css"
+    "build:less": "node_modules/.bin/lessc ./src/styles/all.less ./dist/all.css",
+    "build:semantic": "cd node_modules/../semantic && gulp build && cp ./dist/semantic.min.css ../dist/semantic.min.css && cd - && echo ✔ Generated semantic themes and updated dist"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,12 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "semantic-ui": "2.2.13",
     "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0"
   },
@@ -36,6 +40,6 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.1.0"
+    "semantic-ui-react": "0.77.2"
   }
 }
