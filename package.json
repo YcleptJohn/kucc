@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo nice",
+    "start": "node src/server.js",
     "start:dev": "node_modules/.bin/webpack-dev-server --watch"
   },
   "repository": {
