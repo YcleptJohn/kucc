@@ -7,7 +7,7 @@ configs['default'] = {
 }
 
 configs['development'] = {
-  SERVER_PORT: 5000 
+  SERVER_PORT: 3000 
 }
 
 configs['staging'] = {}
