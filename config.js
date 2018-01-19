@@ -3,7 +3,7 @@ const ENV = (process.env.NODE_ENV || 'development')
 let configs = {}
 
 configs['default'] = {
-  SERVER_PORT: 80 
+  SERVER_PORT: 8080 
 }
 
 configs['development'] = {
