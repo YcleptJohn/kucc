@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo nice",
     "start": "node src/server.js",
-    "start:dev": "node_modules/.bin/webpack-dev-server --watch"
+    "start:dev": "node_modules/.bin/webpack-dev-server --watch",
+    "build:less": "node_modules/.bin/lessc ./src/styles/all.less ./dist/all.css"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,10 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.9",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0"
   },
