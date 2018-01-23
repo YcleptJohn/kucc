@@ -15,7 +15,7 @@ class MaintenancePage extends Component {
         </Header>
         <Divider horizontal/>
         <a href="https://www.facebook.com/groups/363156430381405/">
-          <Icon name='facebook' size='huge' color='yellow' circular inverted/>
+          <Icon name='facebook f' size='huge' color='blue' circular inverted/>
         </a>
       </Dimmer>
     )
