@@ -3,6 +3,9 @@ install:
 - npm install
 script:
 - npm run build:all
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
 cache:
   directories:
     - node_modules
