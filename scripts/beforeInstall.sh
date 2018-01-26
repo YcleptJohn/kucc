@@ -1,1 +1,1 @@
-rm -rf /var/app/current
+echo "Why are you so complicated AWS?"
