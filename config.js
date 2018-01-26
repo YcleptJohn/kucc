@@ -16,4 +16,5 @@ configs['production'] = {
   HIDE_SITE: true
 }
 
+console.log('>>>>config', Object.assign({}, configs.default, configs[ENV]))
 module.exports = Object.assign({}, configs.default, configs[ENV])
