@@ -5,7 +5,9 @@ script:
 - npm run build:all
 before_deploy: cat .gitignore | head -n60 > .gitignore
 deploy:
+  skip_cleanup: true
   provider: elasticbeanstalk
+  bucket_name: elasticbeanstalk-eu-west-2-157918427835
   access_key_id: AKIAIABDFT27CIUD2VDA
   secret_access_key:
     secure: W7N0G3w/TbIz+wLXOZjRDLyJQ6jznYejlft+7xAguW4nh1kQM6QVXuHYxiKF0roE9H2oaT38XTEp670araZbVGZkYkMnJLiA9liVy9t0ra5rJFEw3l7crFLucDC6pQp5qRnC/Yg/YF8nlOln/JyfvX4bK5QWyfbyeoc+TYwsetbtBZKVDhA2LNlH4FOUUmVjG0PB3vCuPljmt3mZ4JHhEN5Fp69AUyjixvlxSKA5h4h8cdtskrf7nuQ6jvNu8fsTS9X6pYJkmisQMGkWNdByJwtMs2dMvpsIibNwKIoWSCwGF1S1euo09kmX8WKiYlfCNB2UxYrQnqQKq+Y/tBWYo0VXckfxXBeDG5dtfclCEHfZ13/OAtZqGt3t2cJ07dblj1GTDRZf4KC8rAdqwJ91acZLeEGAJ26wf77aIW+NMFmxh5yziMwO+OQEXm+9qMEhbYYgoyKP72GeQKL+j2YW91dCYwLVC3G7jSD6bdBluZ1OLCFXvrwTSS+8G7FKAsOP7lNoJtyIPWEJFpV89syw7LbM/LgAvUMm9mi6GBZtY8bqM5YhjtlePJ/XixCs79B+BvzKs4A4l5AlI0Xay+sLLSADtdu3ruDFO7dxJliUzJ/go/wFGwXzVOFNvzicDfJtn12apJKAyiwTJCXf7wsV/6kj4zBboOIUCDJAj2fnBoQ=
