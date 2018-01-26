@@ -76,7 +76,7 @@ hooks:
 # During the BeforeInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
   BeforeInstall:
-    - location: "rm -rf /var/app/current"
+    - location: "scripts/beforeInstall.sh"
       timeout: 50
   #   - location:
   #     timeout:
