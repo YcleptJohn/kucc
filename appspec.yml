@@ -35,7 +35,7 @@ files:
 #   then remove the
 #   "permissions" section altogether. A blank or incomplete "permissions"
 #   section may cause associated deployments to fail.
-# permissions:
+ permissions:
    - object: var/app/current/
      pattern: **
      mode: 777
