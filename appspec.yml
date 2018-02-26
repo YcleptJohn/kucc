@@ -35,10 +35,10 @@ files:
 #   then remove the
 #   "permissions" section altogether. A blank or incomplete "permissions"
 #   section may cause associated deployments to fail.
- permissions:
-   - object: var/app/current/
-     pattern: **
-     mode: 777
+permissions:
+  - object: var/app/current/
+    pattern: "**"
+    mode: 777
 # If you are not running any commands on the Amazon EC2 instance, then remove
 #   the "hooks" section altogether. A blank or incomplete "hooks" section
 #   may cause associated deployments to fail.
