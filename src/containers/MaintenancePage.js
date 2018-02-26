@@ -7,7 +7,7 @@ class MaintenancePage extends Component {
     return (
       <Dimmer
         active={true}
-        page
+        page 
       >
         <Header as='h2' icon inverted>
           KUCC's new website is coming soon!
