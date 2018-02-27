@@ -87,7 +87,6 @@ hooks:
   AfterInstall:
     - location: "scripts/afterInstall.sh"
       timeout: 120000
-      runas: root
   #   - location:
   #     timeout:
   #     runas:
