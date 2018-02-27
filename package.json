@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo nice",
-    "start": "node src/server.js",
+    "start": "npm run build:all && node src/server.js",
     "start:dev": "node_modules/.bin/webpack-dev-server --watch",
     "build:less": "node_modules/.bin/lessc ./src/styles/all.less ./dist/all.css",
     "build:semantic": "cd node_modules/../semantic && gulp build && cd - && echo ✔ Generated semantic themes and updated dist",
