@@ -10,7 +10,7 @@ class MaintenancePage extends Component {
         page 
       >
         <Header as='h2' icon inverted>
-          KUCC's new website is coming soon!
+          KUCC's newish website is coming soon!
           <Header.Subheader>In the meantime please keep up to date with the club on our facebook page below.</Header.Subheader>
         </Header>
         <Divider horizontal/>
