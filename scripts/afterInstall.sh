@@ -2,6 +2,7 @@
 set -e
 
 cd ~/node
+nvm install
 npm install
 
 echo "export NODE_ENV=production"
