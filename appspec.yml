@@ -86,7 +86,8 @@ hooks:
 #   in the script specified in "location".
   AfterInstall:
     - location: "scripts/afterInstall.sh"
-      timeout: 600 
+      timeout: 600
+      runas: ec2-user
   #   - location:
   #     timeout:
   #     runas:
