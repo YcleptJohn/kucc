@@ -13,6 +13,7 @@ configs['development'] = {}
 configs['staging'] = {}
 
 configs['production'] = {
+  SERVER_PORT: 8081,
   HIDE_SITE: true
 }
 
