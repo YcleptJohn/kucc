@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Dimmer, Header, Divider, Image, Icon } from 'semantic-ui-react'
+import { Dimmer, Header, Divider, Image, Icon, Message } from 'semantic-ui-react'
 
 class MaintenancePage extends Component {
   render() {
@@ -17,6 +17,9 @@ class MaintenancePage extends Component {
         <a href="https://www.facebook.com/groups/363156430381405/">
           <Icon name='facebook f' size='huge' color='blue' circular inverted/>
         </a>
+        <Message visible>
+          Test deployment via github
+        </Message>
       </Dimmer>
     )
   }
