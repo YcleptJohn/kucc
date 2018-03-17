@@ -13,14 +13,12 @@ module.exports = {
   rules: [
     {
       test: /\.jsx?/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['env', 'react']
-      }
+      include: path.resolve(__dirname, 'src'),
+      loader: 'babel-loader'
     },
     {
       test: /\.less$/,
+      include: path.resolve(__dirname, 'src', 'styles'),
       use: [{
           loader: "style-loader" // creates style nodes from JS strings
       }, {
@@ -31,6 +29,7 @@ module.exports = {
     },
     {
       test: /\.css$/,
+      include: path.resolve(__dirname, 'src', 'styles'),
       use: 'css-loader'
     },
     {
@@ -49,11 +48,7 @@ module.exports = {
   })
  ],
  resolve: {
-    extensions: ['.js', '.jsx']
-  },
- devServer: {
-  contentBase: path.join(__dirname, 'dist'),
-  compress: true,
-  port: 9999
- }
+    extensions: ['.js', '.jsx'],
+    symlinks: false
+  }
 }
