@@ -22,13 +22,14 @@ class Router extends Component {
     } else {
       return (
         <div>
-          <Navigation />
-          <Switch>
-            <Route exact path='/' component={HomePage}/>
-            <Route exact patch='/trips' component={TripsPage}/>
-            <Route path='/comingsoon' component={MaintenancePage}/>
-            <Route path='/test' component={ThemingLayout}/>
-          </Switch>
+          <Navigation>
+            <Switch>
+              <Route exact path='/' component={HomePage}/>
+              <Route exact patch='/trips' component={TripsPage}/>
+              <Route path='/comingsoon' component={MaintenancePage}/>
+              <Route path='/test' component={ThemingLayout}/>
+            </Switch>
+          </Navigation>
         </div>
       )
     }
