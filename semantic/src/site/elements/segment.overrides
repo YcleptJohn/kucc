@@ -4,4 +4,6 @@
 
 .ui.segment {
     margin: 0px;
+    border-radius: 0;
+    border: none;
 }
