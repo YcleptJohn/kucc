@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
-import MaintenancePage from './MaintenancePage.js'
-import { Button } from 'semantic-ui-react'
 import config from '../../config.js'
+
+import { Button, Container, Divider, Grid, Header, Image, Menu, Segment } from 'semantic-ui-react'
+
+import MaintenancePage from './MaintenancePage.js'
+import HomePage from './HomePage.js'
+import TripsPage from './TripsPage.js'
+import Navigation from '../components/Navigation.js'
 
 class Router extends Component {
   render() {
@@ -17,10 +22,12 @@ class Router extends Component {
     } else {
       return (
         <div>
+          <Navigation />
           <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/about' component={About}/>
+            <Route exact path='/' component={HomePage}/>
+            <Route exact patch='/trips' component={TripsPage}/>
             <Route path='/comingsoon' component={MaintenancePage}/>
+            <Route path='/test' component={ThemingLayout}/>
           </Switch>
         </div>
       )
