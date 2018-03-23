@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Link, Route, Switch, Redirect } from 'react-router-dom'
-import ReactDOM from 'react-dom'
+import { Route, Switch } from 'react-router-dom'
 import Router from './Router.js'
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Switch>
-          <Route path='*' component={Router}/>
+          <Route path='*' component={Router} />
         </Switch>
       </div>
     )

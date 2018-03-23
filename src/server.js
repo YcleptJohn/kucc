@@ -4,7 +4,7 @@ const config = require('../config.js')
 
 const app = express()
 
-app.use(express.static(path.resolve(__dirname, '..', 'dist')));
+app.use(express.static(path.resolve(__dirname, '..', 'dist')))
 
 app.route('/api/?*')
   .get((req, res) => {
@@ -22,5 +22,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(config.SERVER_PORT, () => {
-    console.log(`App listening on port ${config.SERVER_PORT}!`);
-});
+  console.log(`App listening on port ${config.SERVER_PORT}!`)
+})

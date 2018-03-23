@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import config from '../../config.js'
 
 import { Button, Container, Divider, Grid, Header, Image, Menu, Segment } from 'semantic-ui-react'
@@ -10,12 +10,12 @@ import TripsPage from './TripsPage.js'
 import Navigation from '../components/Navigation.js'
 
 class Router extends Component {
-  render() {
-    if(config.HIDE_SITE) {
-      return(
+  render () {
+    if (config.HIDE_SITE) {
+      return (
         <div>
           <Switch>
-            <Route path='*' component={MaintenancePage}/>
+            <Route path='*' component={MaintenancePage} />
           </Switch>
         </div>
       )
@@ -24,10 +24,10 @@ class Router extends Component {
         <div>
           <Navigation>
             <Switch>
-              <Route exact path='/' component={HomePage}/>
-              <Route exact patch='/trips' component={TripsPage}/>
-              <Route path='/comingsoon' component={MaintenancePage}/>
-              <Route path='/test' component={ThemingLayout}/>
+              <Route exact path='/' component={HomePage} />
+              <Route exact patch='/trips' component={TripsPage} />
+              <Route path='/comingsoon' component={MaintenancePage} />
+              <Route path='/test' component={ThemingLayout} />
             </Switch>
           </Navigation>
         </div>
@@ -105,7 +105,7 @@ const ThemingLayout = () => (
           items={[
             { key: '1', name: 'link-1', content: 'Link' },
             { key: '2', name: 'link-2', content: 'Link' },
-            { key: '3', name: 'link-3', content: 'Link' },
+            { key: '3', name: 'link-3', content: 'Link' }
           ]}
           pointing
           secondary
@@ -117,7 +117,7 @@ const ThemingLayout = () => (
           items={[
             { key: '1', name: 'link-1', content: 'Link' },
             { key: '2', name: 'link-2', content: 'Link' },
-            { key: '3', name: 'link-3', content: 'Link' },
+            { key: '3', name: 'link-3', content: 'Link' }
           ]}
           pointing
           tabular
@@ -129,7 +129,7 @@ const ThemingLayout = () => (
           items={[
             { key: 'l1', name: 'link-1', content: 'Link' },
             { key: 'l2', name: 'link-2', content: 'Link' },
-            { key: 't1', name: 'text-1', content: 'Right text', position: 'right' },
+            { key: 't1', name: 'text-1', content: 'Right text', position: 'right' }
           ]}
           pointing
         />
