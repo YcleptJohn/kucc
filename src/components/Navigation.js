@@ -32,17 +32,14 @@ class Navigation extends Component {
   getMenuMarkup (platform) {
     if (platform === 'mobile') {
       return (
-        <Sidebar as={Menu} animation='slide along' width='thin' visible={this.state.showMobileSidebar} icon='labeled' vertical inverted>
+        <Sidebar as={Menu} animation='slide along' width='thin' visible={this.state.showMobileSidebar} icon='labeled' vertical inverted borderless>
           <Menu.Item as={Link} to='/' name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick} />
           <Menu.Item name='about' active={this.state.activeItem === 'about'} onClick={this.handleItemClick} />
           <Menu.Item as={Link} to='/trips' name='trips' active={this.state.activeItem === 'trips'} onClick={this.handleItemClick} />
           <Divider inverted />
           <Menu.Menu position='right'>
-            <Button.Group>
-              <Button inverted>Sign  Up</Button>
-              <Button.Or />
-              <Button inverted color='yellow'>Log In</Button>
-            </Button.Group>
+            <Menu.Item as={Link} to='/signup' name='sign up' active={this.state.activeItem === 'sign up'} onClick={this.handleItemClick} />
+            <Menu.Item as={Link} to='/login' name='log in' active={this.state.activeItem === 'log in'} onClick={this.handleItemClick} />
           </Menu.Menu>
         </Sidebar>
       )
