@@ -4,15 +4,16 @@
   "description": "The rebuilt KUCC website using Node.js + React",
   "main": "index.js",
   "scripts": {
-    "test": "echo nice",
+    "test": "npm run lint",
     "start": "node src/server.js",
-    "watch": "node_modules/.bin/webpack --watch",
+    "watch": "node_modules/.bin/webpack --watch --progress --mode development",
     "build:wp-dev": "node_modules/.bin/webpack --mode development",
     "build:wp-prod": "node_modules/.bin/webpack --mode production",
     "build:less": "node_modules/.bin/lessc ./src/styles/all.less ./dist/all.css",
     "build:semantic": "cd node_modules/../semantic && gulp build && cd - && echo ✔ Generated semantic themes and updated dist",
     "build:all-dev": "npm run build:semantic && npm run build:less && npm run build:wp-dev",
-    "build:all-prod": "npm run build:semantic && npm run build:less && npm run build:wp-prod"
+    "build:all-prod": "npm run build:semantic && npm run build:less && npm run build:wp-prod",
+    "lint": "node_modules/.bin/standard src/**/*.js && echo Linting passed 🎉"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "semantic-ui-react": "0.77.2"
+    "semantic-ui-react": "0.77.2",
+    "standard": "11.0.1"
   }
 }
