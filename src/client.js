@@ -4,7 +4,7 @@ import App from './containers/App'
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-    , document.getElementById('appContainer'))
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+  , document.getElementById('appContainer'))
