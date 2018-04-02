@@ -25,3 +25,7 @@ CREATE TABLE `tripApplicants` (
 	`paid` FLOAT(10),
 	PRIMARY KEY (`tripId`,`userId`)
 );
+
+ALTER TABLE `tripApplicants` ADD CONSTRAINT `tripApplicants_fk0` FOREIGN KEY (`tripId`) REFERENCES `trips`(`tripId`) ON DELETE CASCADE;
+
+ALTER TABLE `tripApplicants` ADD CONSTRAINT `tripApplicants_fk1` FOREIGN KEY (`userId`) REFERENCES `users`(`userId`) ON DELETE CASCADE;
