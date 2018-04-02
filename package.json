@@ -13,7 +13,8 @@
     "build:semantic": "cd node_modules/../semantic && gulp build && cd - && echo ✔ Generated semantic themes and updated dist",
     "build:all-dev": "npm run build:semantic && npm run build:less && npm run build:wp-dev",
     "build:all-prod": "npm run build:semantic && npm run build:less && npm run build:wp-prod",
-    "lint": "node_modules/.bin/standard src/**/*.js && echo Linting passed 🎉"
+    "lint": "node_modules/.bin/standard src/**/*.js && echo Linting passed 🎉",
+    "lint:fix": "node_modules/.bin/standard src/**/*.js --fix && echo Linting fixed 🎉"
   },
   "repository": {
     "type": "git",
