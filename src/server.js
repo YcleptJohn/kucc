@@ -3,7 +3,7 @@ const path = require('path')
 const config = require('../config.js')
 const database = require('./lib/database.js')
 
-const app = module.exports = express()
+const app = module.exports = express() // Export the express module for ease of route definition from other files
 
 app.use(express.static(path.resolve(__dirname, '..', 'dist')));
 app.use(express.json())
