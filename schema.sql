@@ -1,7 +1,8 @@
 CREATE TABLE `users` (
 	`userId` INT(10) NOT NULL AUTO_INCREMENT,
-	`firstName` varchar(100) NOT NULL,
+	`forename` varchar(100) NOT NULL,
 	`surname` varchar(100) NOT NULL,
+	`kentId` varchar(20),
 	`email` varchar(255) NOT NULL,
 	`password` varchar(1024) NOT NULL,
 	`salt` varchar(1024) NOT NULL,
@@ -24,7 +25,3 @@ CREATE TABLE `tripApplicants` (
 	`paid` FLOAT(10),
 	PRIMARY KEY (`tripId`,`userId`)
 );
-
-ALTER TABLE `tripApplicants` ADD CONSTRAINT `tripApplicants_fk0` FOREIGN KEY (`tripId`) REFERENCES `trips`(`tripId`);
-
-ALTER TABLE `tripApplicants` ADD CONSTRAINT `tripApplicants_fk1` FOREIGN KEY (`userId`) REFERENCES `users`(`userId`);
