@@ -8,6 +8,7 @@ import MaintenancePage from './MaintenancePage.js'
 import HomePage from './HomePage.js'
 import TripsPage from './TripsPage.js'
 import Navigation from '../components/Navigation.js'
+import SignUpPage from './SignUpPage.js'
 
 class Router extends Component {
   render () {
@@ -25,7 +26,8 @@ class Router extends Component {
           <Navigation>
             <Switch>
               <Route exact path='/' component={HomePage} />
-              <Route exact patch='/trips' component={TripsPage} />
+              <Route exact path='/trips' component={TripsPage} />
+              <Route exact path='/signup' component={SignUpPage} />
               <Route path='/comingsoon' component={MaintenancePage} />
               <Route path='/test' component={ThemingLayout} />
             </Switch>
