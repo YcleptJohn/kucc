@@ -12,7 +12,7 @@ auth.hashPassword = (password, salt) => {
   return crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex')
 }
 
-auth.verifyLogin = util.promisify(async (email, password, cb) => {
+auth.doLogin = util.promisify(async (email, password, cb) => {
   let account
   try {
     const rows = await database.query('SELECT * FROM kucc.users WHERE email = ?', [email])
@@ -24,5 +24,8 @@ auth.verifyLogin = util.promisify(async (email, password, cb) => {
 
   const attemptedHash = auth.hashPassword(password, account.salt)
   if (attemptedHash !== account.password) return cb(null, false)
-  return cb(null, true)
+  delete account.password
+  delete account.salt
+  delete account.stripeCustomerId
+  return cb(null, account)
 })

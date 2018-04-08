@@ -18,6 +18,7 @@ class Navigation extends Component {
   }
 
   handleItemClick (e, { name }) {
+    if (!name) return this.setState({ activeItem: null })
     this.setState({ activeItem: name, showMobileSidebar: false })
   }
 
@@ -52,9 +53,9 @@ class Navigation extends Component {
         <Menu.Item as={Link} to='/trips' name='trips' active={this.state.activeItem === 'trips'} onClick={this.handleItemClick} />
         <Menu.Menu position='right'>
           <Button.Group>
-            <Button inverted>Sign  Up</Button>
+            <Button inverted onClick={this.handleItemClick} as={Link} to='/signup'>Sign Up</Button>
             <Button.Or />
-            <Button inverted color='yellow'>Log In</Button>
+            <Button inverted color='yellow' onClick={this.handleItemClick}>Log In</Button>
           </Button.Group>
         </Menu.Menu>
       </Menu>
