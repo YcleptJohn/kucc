@@ -66,7 +66,7 @@ class SignUpPage extends Component {
   }
 
   checkForm () {
-    let errors = (Object.keys(this.state.fields).map((k, v) => !this.state.fields[k].isValid ? this.state.fields[k].message : null)).filter(f => f !== null)
+    let errors = (Object.keys(this.state.fields).map(k => !this.state.fields[k].isValid ? this.state.fields[k].message : null)).filter(f => f !== null)
     const fields = this.state.fields
     if (fields.password.value !== fields.confirmPassword.value) {
       errors.push('The passwords enterred must match')
@@ -87,9 +87,11 @@ class SignUpPage extends Component {
       curr[k] = this.state.fields[k].value
       Object.assign(formValues, curr)
     })
+    console.log(process.env)
     fetch('/api/user/create', {
       method: 'POST',
-      body: JSON.stringify(formValues),
+      credentials: 'same-origin',
+      body: JSON.stringify(Object.assign({}, { token: process.env.API_TOKEN }, formValues)),
       headers: {
         'Content-Type': 'application/json'
       }

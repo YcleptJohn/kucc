@@ -13,7 +13,7 @@ app.use(cookieSession({
   name: 'kucc',
   secret: process.env.COOKIE_SECRET,
   signed: false,
-  httpOnly: true,
+  httpOnly: false,
   maxAge: 24 * 60 * 60 * 1000 * 365
 }))
 
