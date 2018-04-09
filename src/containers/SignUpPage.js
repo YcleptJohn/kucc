@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Container, Segment, Header, Divider, Message } from 'semantic-ui-react'
+import fetch from 'isomorphic-fetch'
 
 class SignUpPage extends Component {
   constructor (props) {
@@ -7,30 +8,31 @@ class SignUpPage extends Component {
     this.state = {
       isLoading: false,
       formErrors: [],
+      successfulSubmission: false,
       fields: {
         forename: {
           value: '',
           regex: /.{1,}/,
           isValid: false,
-          message: 'You must enter a valid forename like JOHN'
+          message: 'You must provide your first name.'
         },
         surname: {
           value: '',
           regex: /.{1,}/,
           isValid: false,
-          message: 'You must enter a valid surname like TAYLOR'
+          message: 'You must provide your last name.'
         },
         kentId: {
           value: '',
           regex: /[a-zA-Z0-9]*/,
           isValid: false,
-          message: 'You must enter a valid kent-ish ID'
+          message: 'You must provide a valid Kent ID. (e.g jjt24)'
         },
         email: {
           value: '',
           regex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
           isValid: false,
-          message: 'You must enter a valid email address'
+          message: 'You must provide a valid email address.'
         },
         password: {
           value: '',
@@ -74,11 +76,34 @@ class SignUpPage extends Component {
 
   handleSubmit (e) {
     if (this.checkForm().length !== 0) {
-      this.setState({
+      return this.setState({
         formErrors: this.checkForm()
       })
     }
-    // SET LOADING STATE - POST - WAIT - DISPLAY RESPONSE ETC
+    this.setState({ isLoading: true })
+    let formValues = {}
+    Object.keys(this.state.fields).map(k => {
+      let curr = {}
+      curr[k] = this.state.fields[k].value
+      Object.assign(formValues, curr)
+    })
+    fetch('/api/user/create', {
+      method: 'POST',
+      body: JSON.stringify(formValues),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.text()) // Parse response as text
+      .catch(error => console.error('Error:', error))
+      .then(response => {
+        if (response !== 'OK') {
+          this.setState({ formErrors: [response] })
+        } else {
+          this.setState({ formErrors: [] })
+          this.setState({ successfulSubmission: true })
+        }
+        this.setState({ isLoading: false })
+      })
   }
 
   render () {
@@ -90,20 +115,25 @@ class SignUpPage extends Component {
             <Header.Subheader>Fill out the form below to create your account</Header.Subheader>
           </Header>
           <Divider />
-          <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0}>
+          <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
             <Form.Group widths='equal'>
-              <Form.Input fluid label='First name' placeholder='First name...' id='forename' onChange={this.handleChange} />
-              <Form.Input fluid label='Last name' placeholder='Last name...' id='surname' onChange={this.handleChange} />
+              <Form.Input fluid label='First name' placeholder='First name...' id='forename' onChange={this.handleChange} autoComplete='given-name' />
+              <Form.Input fluid label='Last name' placeholder='Last name...' id='surname' onChange={this.handleChange} autoComplete='family-name' />
               <Form.Input fluid label='Kent ID' placeholder='e.g jjt24' id='kentId' onChange={this.handleChange} />
             </Form.Group>
-            <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} />
-            <Form.Input fluid label='Password' placeholder='Password...' id='password' onChange={this.handleChange} />
-            <Form.Input fluid label='Confirm Password' placeholder='Retype password...' id='confirmPassword' onChange={this.handleChange} />
+            <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
+            <Form.Input fluid label='Password' type='password' placeholder='Password...' id='password' onChange={this.handleChange} />
+            <Form.Input fluid label='Confirm Password' type='password' placeholder='Retype password...' id='confirmPassword' onChange={this.handleChange} />
             <Message
               error
               floating
-              header={this.state.formErrors === 1 ? 'There was an error in your submission:' : 'There are a few errors in your submission:'}
+              header='Something went wrong with your submission:'
               list={this.state.formErrors}
+            />
+            <Message
+              success
+              floating
+              header='Account created succesfully'
             />
             <Form.Button onClick={this.handleSubmit} primary>Submit</Form.Button>
           </Form>

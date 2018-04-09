@@ -26,6 +26,11 @@ CREATE TABLE `tripApplicants` (
 	PRIMARY KEY (`tripId`,`userId`)
 );
 
+ALTER TABLE `users` ADD UNIQUE(`email`);
+
 ALTER TABLE `tripApplicants` ADD CONSTRAINT `tripApplicants_fk0` FOREIGN KEY (`tripId`) REFERENCES `trips`(`tripId`) ON DELETE CASCADE;
 
 ALTER TABLE `tripApplicants` ADD CONSTRAINT `tripApplicants_fk1` FOREIGN KEY (`userId`) REFERENCES `users`(`userId`) ON DELETE CASCADE;
+
+
+ALTER TABLE `tripApplicants` DROP FOREIGN KEY `tripApplicants_fk0`
