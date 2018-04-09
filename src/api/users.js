@@ -28,21 +28,22 @@ app.post('/api/user/create', async (req, res) => {
     return res.status(200).send('OK')
   } catch (e) {
     if (e.code === 'ER_DUP_ENTRY') return res.status(409).send('This email address is already in use')
+    console.log(e)
     return res.status(500).send('An error occurred communicating with our database. Please let us know if this perists.')
   }
 })
 
 app.post('/api/user/login', async (req, res) => {
-  if (req.session.user) return res.status(304).send('Already logged in')
   if (!validation.hasTruthyProperties(req.body, ['email', 'password'])) return res.status(400).send('Missing params')
   if (!validation.checkEmailFormat(req.body.email)) return res.status(400).send('Invalid email')
   let user
   try {
     user = await auth.doLogin(req.body.email, req.body.password)
   } catch (e) {
-    return res.status(500).send(e.message)
+    if (e.message === 'Account not found') return res.status(500).send('Account not found')
+    return res.status(500).send('Something went wrong whilst trying to verify your credentials. Please contact us if this persists')
   }
-  if (!user) return res.status(500).send('Login check failed')
+  if (!user) return res.status(500).send('Incorrect password')
   req.session.user = user
   return res.status(200).send('OK')
 })

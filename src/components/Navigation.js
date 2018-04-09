@@ -55,7 +55,7 @@ class Navigation extends Component {
           <Button.Group>
             <Button inverted onClick={this.handleItemClick} as={Link} to='/signup'>Sign Up</Button>
             <Button.Or />
-            <Button inverted color='yellow' onClick={this.handleItemClick}>Log In</Button>
+            <Button inverted color='yellow' onClick={this.handleItemClick} as={Link} to='/login'>Log In</Button>
           </Button.Group>
         </Menu.Menu>
       </Menu>
