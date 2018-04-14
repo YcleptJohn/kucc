@@ -26,6 +26,14 @@ CREATE TABLE `tripApplicants` (
 	PRIMARY KEY (`tripId`,`userId`)
 );
 
+CREATE TABLE `resetTokens` (
+	`tokenId` varchar(100) NOT NULL,
+	`email` varchar(255) NOT NULL,
+	`expirationDate` DATETIME NOT NULL,
+	`state` varchar(20) NOT NULL DEFAULT 'unused',
+	PRIMARY KEY (`tokenId`,`email`)
+);
+
 ALTER TABLE `users` ADD UNIQUE(`email`);
 
 ALTER TABLE `tripApplicants` ADD CONSTRAINT `tripApplicants_fk0` FOREIGN KEY (`tripId`) REFERENCES `trips`(`tripId`) ON DELETE CASCADE;

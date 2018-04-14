@@ -48,8 +48,27 @@ app.post('/api/user/login', async (req, res) => {
   return res.status(200).send('OK')
 })
 
-app.get('/api/testdb', async (req, res) => {
-  return res.send(req.session)
+app.post('/api/user/reset/request', async (req, res) => {
+  if (!validation.hasTruthyProperties(req.body, ['email'])) return res.status(400).send('Missing params')
+  if (!validation.checkEmailFormat(req.body.email)) return res.status(400).send('Invalid email')
+  try {
+    await auth.generatePasswordReset(req.body.email)
+    return res.status(200).send('OK')
+  } catch (e) {
+    if (e.message === 'NO_ACCOUNT') return res.status(400).send('Account not found')
+    return res.status(500).send('Something went wrong whilst trying to generate a reset for you. Please contact us if this persists')
+  }
+})
+
+app.get('/api/user/reset/validate', async (req, res) => {
+  if (!validation.hasTruthyProperties(req.query, ['resetToken'])) return res.status(400).send('Missing params')
+  try {
+    await auth.validatePasswordReset(req.query.resetToken)
+    return res.status(200).send('OK')
+  } catch (e) {
+    if (e.message === 'INVALID_RESET_TOKEN') return res.status(500).send('The reset link given was invalid')
+    return res.status(500).send(e.message)
+  }
 })
 
 app.get('/api/2', (req, res) => {
