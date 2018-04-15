@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import fetch from 'isomorphic-fetch'
 
 class PasswordResetRequestPage extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isLoading: false,
@@ -25,23 +25,23 @@ class PasswordResetRequestPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  checkRegex(val, regex) {
+  checkRegex (val, regex) {
     return !!('' + val).match(regex)
   }
 
-  handleChange(e) {
+  handleChange (e) {
     let f = this.state.fields[e.target.id]
     f.value = e.target.value
     const valid = this.checkRegex(e.target.value, f.regex)
     f.isValid = valid
   }
 
-  checkForm() {
+  checkForm () {
     let errors = (Object.keys(this.state.fields).map(k => !this.state.fields[k].isValid ? this.state.fields[k].message : null)).filter(f => f !== null)
     return errors
   }
 
-  handleSubmit(e) {
+  handleSubmit (e) {
     if (this.checkForm().length !== 0) {
       return this.setState({
         formErrors: this.checkForm()
@@ -67,8 +67,7 @@ class PasswordResetRequestPage extends Component {
         if (response === 'NO_ACCOUNT') {
           this.setState({ formErrors: [<p key='NO_ACCOUNT'>There isn't an account attached to this email address. <Link to='/signup'>Sign up?</Link></p>] })
           this.setState({ successfulSubmission: false })
-        }
-        else if (response !== 'OK') {
+        } else if (response !== 'OK') {
           this.setState({ formErrors: [response] })
         } else {
           this.setState({ formErrors: [] })
@@ -78,7 +77,7 @@ class PasswordResetRequestPage extends Component {
       })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Container as={Segment}>

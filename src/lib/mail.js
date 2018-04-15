@@ -29,7 +29,7 @@ mail.sendResetEmail = (target, resetToken) => {
   let mailOptions = {
     from: 'Kent University Caving Club <YcleptJohn@gmail.com>',
     to: target,
-    subject: 'Reset your KentCaving password', 
+    subject: 'Reset your KentCaving password',
     text: `To reset your password for KentCaving please visit the following link: https://kentcaving.co.uk/reset/${resetToken}`,
     html: `To reset your password for KentCaving please visit the following link: <a href='https://kentcaving.co.uk/reset/${resetToken}'>https://kentcaving.co.uk/reset/${resetToken}</a>`
   }
@@ -37,6 +37,6 @@ mail.sendResetEmail = (target, resetToken) => {
     if (e) {
       return console.log(e)
     }
-    console.log('Password Reset Email sent: ', info);
+    console.log('Password Reset Email sent: ', info)
   })
 }

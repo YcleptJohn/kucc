@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import fetch from 'isomorphic-fetch'
 
 class PasswordResetFulfilPage extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       resetToken: this.props.match.params.tokenId,
@@ -32,18 +32,18 @@ class PasswordResetFulfilPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  checkRegex(val, regex) {
+  checkRegex (val, regex) {
     return !!('' + val).match(regex)
   }
 
-  handleChange(e) {
+  handleChange (e) {
     let f = this.state.fields[e.target.id]
     f.value = e.target.value
     const valid = this.checkRegex(e.target.value, f.regex)
     f.isValid = valid
   }
 
-  checkForm() {
+  checkForm () {
     let errors = (Object.keys(this.state.fields).map(k => !this.state.fields[k].isValid ? this.state.fields[k].message : null)).filter(f => f !== null)
     const fields = this.state.fields
     if (fields.newPassword.value !== fields.confirmNewPassword.value) {
@@ -52,7 +52,7 @@ class PasswordResetFulfilPage extends Component {
     return errors
   }
 
-  handleSubmit(e) {
+  handleSubmit (e) {
     if (this.checkForm().length !== 0) {
       return this.setState({
         formErrors: this.checkForm()
@@ -79,12 +79,10 @@ class PasswordResetFulfilPage extends Component {
         if (response === 'INVALID_RESET_TOKEN') {
           this.setState({ formErrors: ['The given password reset token was invalid. Please click the link directly from your reset email.'] })
           this.setState({ successfulSubmission: false })
-        }
-        else if (response === 'EXPIRED_RESET_TOKEN') {
+        } else if (response === 'EXPIRED_RESET_TOKEN') {
           this.setState({ formErrors: [<p key='EXPIRED_RESET_TOKEN'>This reset link has expired. <Link to='/reset'>Request a new one?</Link></p>] })
           this.setState({ successfulSubmission: false })
-        }
-        else if (response !== 'OK') {
+        } else if (response !== 'OK') {
           this.setState({ formErrors: [response] })
         } else {
           this.setState({ formErrors: [] })
@@ -94,7 +92,7 @@ class PasswordResetFulfilPage extends Component {
       })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Container as={Segment}>

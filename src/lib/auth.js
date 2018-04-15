@@ -32,7 +32,6 @@ auth.doLogin = util.promisify(async (email, password, cb) => {
   return cb(null, account)
 })
 
-
 auth._generateResetToken = () => {
   return crypto.randomBytes(50).toString('hex')
 }
@@ -53,14 +52,14 @@ auth.generatePasswordReset = util.promisify(async (email, cb) => {
   let accExists = false
   try {
     accExists = await auth.ensureUserExists(email)
-  } catch(e) {
+  } catch (e) {
     return cb(e)
   }
   if (!accExists) return cb(new Error('NO_ACCOUNT'))
   const token = auth._generateResetToken()
   const expiration = moment().add(12, 'hours')
   try {
-    const rows = await database.query('INSERT INTO resetTokens (tokenId, email, expirationDate) VALUES (?, ?, ?)', [token, email, expiration.toISOString()])
+    await database.query('INSERT INTO resetTokens (tokenId, email, expirationDate) VALUES (?, ?, ?)', [token, email, expiration.toISOString()])
   } catch (e) {
     return cb(e)
   }

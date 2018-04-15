@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import fetch from 'isomorphic-fetch'
 
 class LoginPage extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isLoading: false,
@@ -31,24 +31,23 @@ class LoginPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  checkRegex(val, regex) {
+  checkRegex (val, regex) {
     return !!('' + val).match(regex)
   }
 
-  handleChange(e) {
+  handleChange (e) {
     let f = this.state.fields[e.target.id]
     f.value = e.target.value
     const valid = this.checkRegex(e.target.value, f.regex)
     f.isValid = valid
   }
 
-  checkForm() {
+  checkForm () {
     let errors = (Object.keys(this.state.fields).map(k => !this.state.fields[k].isValid ? this.state.fields[k].message : null)).filter(f => f !== null)
-    const fields = this.state.fields
     return errors
   }
 
-  handleSubmit(e) {
+  handleSubmit (e) {
     if (this.checkForm().length !== 0) {
       return this.setState({
         formErrors: this.checkForm()
@@ -74,12 +73,10 @@ class LoginPage extends Component {
         if (response === 'Incorrect password') {
           this.setState({ formErrors: [<p key='IncorrectPass'>Incorrect Password. <Link to='/reset'>Reset?</Link></p>] })
           this.setState({ successfulSubmission: false })
-        }
-        else if (response === 'Account not found') {
+        } else if (response === 'Account not found') {
           this.setState({ formErrors: [<p key='NoAccount'>There isn't an account attached to this email address <Link to='/signup'>Sign up?</Link></p>] })
           this.setState({ successfulSubmission: false })
-        }
-        else if (response === 'OK' || response ==='Already logged in') {
+        } else if (response === 'OK' || response === 'Already logged in') {
           this.setState({ formErrors: [] })
           this.setState({ successfulSubmission: true })
         } else {
@@ -90,7 +87,7 @@ class LoginPage extends Component {
       })
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Container as={Segment}>

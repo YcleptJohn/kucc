@@ -23,6 +23,7 @@ app.route('/api/*')
     next()
   })
   .post((req, res, next) => {
+    console.log(process.env.API_TOKEN)
     if (req && req.body && req.body.token !== process.env.API_TOKEN) return res.sendStatus(403)
     next()
   })

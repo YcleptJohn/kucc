@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 class Navigation extends Component {
   constructor (props) {
     super(props)
+    console.log(props)
     this.state = {
       activeItem: 'home',
       mobileLogoRedirect: false,
