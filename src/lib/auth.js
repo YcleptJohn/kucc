@@ -3,6 +3,7 @@ const crypto = require('crypto')
 const database = require('../lib/database.js')
 const util = require('util')
 const moment = require('moment')
+const mail = require('./mail.js')
 
 auth.generateSalt = () => {
   return crypto.randomBytes(512).toString('hex')
@@ -57,29 +58,43 @@ auth.generatePasswordReset = util.promisify(async (email, cb) => {
   }
   if (!accExists) return cb(new Error('NO_ACCOUNT'))
   const token = auth._generateResetToken()
-  const expiration = moment().add(5, 'hours')
+  const expiration = moment().add(12, 'hours')
   try {
     const rows = await database.query('INSERT INTO resetTokens (tokenId, email, expirationDate) VALUES (?, ?, ?)', [token, email, expiration.toISOString()])
   } catch (e) {
     return cb(e)
   }
+  mail.sendResetEmail(email, token)
   return cb(null)
 })
 
-auth.validatePasswordReset = util.promisify(async (resetToken, cb) => {
+auth.fulfilPasswordReset = util.promisify(async (resetToken, password, cb) => {
+  if (!resetToken || !password) cb(new Error('Missing params'))
   let reset
   try {
     reset = await database.query('SELECT * FROM kucc.resetTokens WHERE tokenId = ?', [resetToken])
   } catch (e) {
-    return cb(e)
+    return cb(new Error('DB_ERROR'))
   }
   if (!reset.length || reset.length !== 1) return cb(new Error('INVALID_RESET_TOKEN'))
   reset = reset[0]
-  if (moment().isAfter(reset.expirationDate) || reset.state !== 'unused') return cb (new Error('EXPIRED_RESET_TOKEN'))
+  if (moment().isAfter(reset.expirationDate) || reset.state !== 'unused') return cb(new Error('EXPIRED_RESET_TOKEN'))
+  let user
   try {
-    database.query('UPDATE kucc.resetTokens SET state=\'used\' WHERE tokenId = ?', [resetToken])
+    user = (await database.query(`SELECT u.email, u.salt FROM kucc.users u JOIN kucc.resetTokens t ON u.email = t.email WHERE t.tokenId = ?`, [resetToken]))[0]
   } catch (e) {
-    console.log(e, 'occured whilst trying to finalise a password reset')
+    return cb(new Error('DB_ERROR'))
+  }
+  const newPassHashed = auth.hashPassword(password, user.salt)
+  try {
+    await database.query('UPDATE kucc.resetTokens SET state=\'used\' WHERE tokenId = ?', [resetToken])
+  } catch (e) {
+    console.log(e, 'Failed to update token after resetting password')
+  }
+  try {
+    await database.query('UPDATE kucc.users SET password=? WHERE email = ?', [newPassHashed, user.email])
+  } catch (e) {
+    return cb(new Error('DB_ERROR'))
   }
   return cb(null)
 })

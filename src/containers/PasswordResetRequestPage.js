@@ -3,7 +3,7 @@ import { Form, Container, Segment, Header, Divider, Message } from 'semantic-ui-
 import { Link } from 'react-router-dom'
 import fetch from 'isomorphic-fetch'
 
-class LoginPage extends Component {
+class PasswordResetRequestPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -15,13 +15,7 @@ class LoginPage extends Component {
           value: '',
           regex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
           isValid: false,
-          message: 'You must provide your email address in a valid format.'
-        },
-        password: {
-          value: '',
-          regex: /.{1,}/,
-          isValid: false,
-          message: 'You must provide your password.'
+          message: 'You must provide a valid email address.'
         }
       }
     }
@@ -44,7 +38,6 @@ class LoginPage extends Component {
 
   checkForm() {
     let errors = (Object.keys(this.state.fields).map(k => !this.state.fields[k].isValid ? this.state.fields[k].message : null)).filter(f => f !== null)
-    const fields = this.state.fields
     return errors
   }
 
@@ -61,7 +54,7 @@ class LoginPage extends Component {
       curr[k] = this.state.fields[k].value
       Object.assign(formValues, curr)
     })
-    fetch('/api/user/login', {
+    fetch('/api/user/reset/request', {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify(Object.assign({}, { token: process.env.API_TOKEN }, formValues)),
@@ -71,20 +64,15 @@ class LoginPage extends Component {
     }).then(res => res.text()) // Parse response as text
       .catch(error => console.error('Error:', error))
       .then(response => {
-        if (response === 'Incorrect password') {
-          this.setState({ formErrors: [<p key='IncorrectPass'>Incorrect Password. <Link to='/reset'>Reset?</Link></p>] })
+        if (response === 'NO_ACCOUNT') {
+          this.setState({ formErrors: [<p key='NO_ACCOUNT'>There isn't an account attached to this email address. <Link to='/signup'>Sign up?</Link></p>] })
           this.setState({ successfulSubmission: false })
         }
-        else if (response === 'Account not found') {
-          this.setState({ formErrors: [<p key='NoAccount'>There isn't an account attached to this email address <Link to='/signup'>Sign up?</Link></p>] })
-          this.setState({ successfulSubmission: false })
-        }
-        else if (response === 'OK' || response ==='Already logged in') {
+        else if (response !== 'OK') {
+          this.setState({ formErrors: [response] })
+        } else {
           this.setState({ formErrors: [] })
           this.setState({ successfulSubmission: true })
-        } else {
-          this.setState({ formErrors: [response] })
-          this.setState({ successfulSubmission: false })
         }
         this.setState({ isLoading: false })
       })
@@ -95,25 +83,24 @@ class LoginPage extends Component {
       <div>
         <Container as={Segment}>
           <Header as='h2'>
-            Login
-            <Header.Subheader>Fill out the form below to sign in to your account</Header.Subheader>
+            Request Password Reset
+            <Header.Subheader>Please provide your account's email address below to reset the password</Header.Subheader>
           </Header>
           <Divider />
           <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
             <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
-            <Form.Input fluid label='Password' type='password' placeholder='Password...' id='password' onChange={this.handleChange} />
             <Message
               error
               floating
               header='Something went wrong with your submission:'
-              list={this.state.formErrors} />
+              list={this.state.formErrors}
+            />
             <Message
               success
               floating
-              icon='checkmark'
-              header='Logged in successfully'
+              header='Password reset email sent. It should arrive shortly.'
             />
-            <Form.Button onClick={this.handleSubmit} primary>Login</Form.Button>
+            <Form.Button onClick={this.handleSubmit} primary>Request Reset</Form.Button>
           </Form>
         </Container>
       </div>
@@ -121,4 +108,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage
+export default PasswordResetRequestPage

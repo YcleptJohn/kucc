@@ -55,22 +55,19 @@ app.post('/api/user/reset/request', async (req, res) => {
     await auth.generatePasswordReset(req.body.email)
     return res.status(200).send('OK')
   } catch (e) {
-    if (e.message === 'NO_ACCOUNT') return res.status(400).send('Account not found')
+    if (e.message === 'NO_ACCOUNT') return res.status(400).send(`NO_ACCOUNT`)
     return res.status(500).send('Something went wrong whilst trying to generate a reset for you. Please contact us if this persists')
   }
 })
 
-app.get('/api/user/reset/validate', async (req, res) => {
-  if (!validation.hasTruthyProperties(req.query, ['resetToken'])) return res.status(400).send('Missing params')
+app.post('/api/user/reset/fulfil', async (req, res) => {
+  if (!validation.hasTruthyProperties(req.body, ['resetToken', 'newPassword'])) return res.status(400).send('Missing params')
   try {
-    await auth.validatePasswordReset(req.query.resetToken)
+    await auth.fulfilPasswordReset(req.body.resetToken, req.body.newPassword)
     return res.status(200).send('OK')
   } catch (e) {
-    if (e.message === 'INVALID_RESET_TOKEN') return res.status(500).send('The reset link given was invalid')
-    return res.status(500).send(e.message)
+    if (e.message === 'INVALID_RESET_TOKEN') return res.status(500).send('INVALID_RESET_TOKEN')
+    if (e.message === 'EXPIRED_RESET_TOKEN') return res.status(500).send('EXPIRED_RESET_TOKEN')
+    return res.status(500).send('Something went wrong whilst fulfilling this request. Please contact us if this persists.')
   }
-})
-
-app.get('/api/2', (req, res) => {
-  return res.send(req.session)
 })

@@ -47,6 +47,7 @@
     "express": "^4.16.2",
     "moment": "2.22.0",
     "mysql": "2.15.0",
+    "nodemailer": "4.6.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",

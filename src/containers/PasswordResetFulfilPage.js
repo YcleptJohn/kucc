@@ -3,25 +3,26 @@ import { Form, Container, Segment, Header, Divider, Message } from 'semantic-ui-
 import { Link } from 'react-router-dom'
 import fetch from 'isomorphic-fetch'
 
-class LoginPage extends Component {
+class PasswordResetFulfilPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      resetToken: this.props.match.params.tokenId,
       isLoading: false,
       formErrors: [],
       successfulSubmission: false,
       fields: {
-        email: {
+        newPassword: {
           value: '',
-          regex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          regex: /.{10,}/,
           isValid: false,
-          message: 'You must provide your email address in a valid format.'
+          message: 'Your new password must be at least 10 characters, come on this is 2018.'
         },
-        password: {
+        confirmNewPassword: {
           value: '',
-          regex: /.{1,}/,
+          regex: /.*/,
           isValid: false,
-          message: 'You must provide your password.'
+          message: null // Ignore this validation because the matching password handles it
         }
       }
     }
@@ -45,6 +46,9 @@ class LoginPage extends Component {
   checkForm() {
     let errors = (Object.keys(this.state.fields).map(k => !this.state.fields[k].isValid ? this.state.fields[k].message : null)).filter(f => f !== null)
     const fields = this.state.fields
+    if (fields.newPassword.value !== fields.confirmNewPassword.value) {
+      errors.push('The passwords enterred must match')
+    }
     return errors
   }
 
@@ -61,30 +65,30 @@ class LoginPage extends Component {
       curr[k] = this.state.fields[k].value
       Object.assign(formValues, curr)
     })
-    fetch('/api/user/login', {
+    console.log(process.env)
+    fetch('/api/user/reset/fulfil', {
       method: 'POST',
       credentials: 'same-origin',
-      body: JSON.stringify(Object.assign({}, { token: process.env.API_TOKEN }, formValues)),
+      body: JSON.stringify(Object.assign({}, { token: process.env.API_TOKEN }, formValues, { resetToken: this.state.resetToken })),
       headers: {
         'Content-Type': 'application/json'
       }
     }).then(res => res.text()) // Parse response as text
       .catch(error => console.error('Error:', error))
       .then(response => {
-        if (response === 'Incorrect password') {
-          this.setState({ formErrors: [<p key='IncorrectPass'>Incorrect Password. <Link to='/reset'>Reset?</Link></p>] })
+        if (response === 'INVALID_RESET_TOKEN') {
+          this.setState({ formErrors: ['The given password reset token was invalid. Please click the link directly from your reset email.'] })
           this.setState({ successfulSubmission: false })
         }
-        else if (response === 'Account not found') {
-          this.setState({ formErrors: [<p key='NoAccount'>There isn't an account attached to this email address <Link to='/signup'>Sign up?</Link></p>] })
+        else if (response === 'EXPIRED_RESET_TOKEN') {
+          this.setState({ formErrors: [<p key='EXPIRED_RESET_TOKEN'>This reset link has expired. <Link to='/reset'>Request a new one?</Link></p>] })
           this.setState({ successfulSubmission: false })
         }
-        else if (response === 'OK' || response ==='Already logged in') {
+        else if (response !== 'OK') {
+          this.setState({ formErrors: [response] })
+        } else {
           this.setState({ formErrors: [] })
           this.setState({ successfulSubmission: true })
-        } else {
-          this.setState({ formErrors: [response] })
-          this.setState({ successfulSubmission: false })
         }
         this.setState({ isLoading: false })
       })
@@ -95,25 +99,25 @@ class LoginPage extends Component {
       <div>
         <Container as={Segment}>
           <Header as='h2'>
-            Login
-            <Header.Subheader>Fill out the form below to sign in to your account</Header.Subheader>
+            Change Password
+            <Header.Subheader>Please supply a new password for your account below</Header.Subheader>
           </Header>
           <Divider />
           <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
-            <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
-            <Form.Input fluid label='Password' type='password' placeholder='Password...' id='password' onChange={this.handleChange} />
+            <Form.Input fluid label='Password' type='password' placeholder='Password...' id='newPassword' onChange={this.handleChange} />
+            <Form.Input fluid label='Confirm Password' type='password' placeholder='Retype password...' id='confirmNewPassword' onChange={this.handleChange} />
             <Message
               error
               floating
               header='Something went wrong with your submission:'
-              list={this.state.formErrors} />
+              list={this.state.formErrors}
+            />
             <Message
               success
               floating
-              icon='checkmark'
-              header='Logged in successfully'
+              header='Password reset successfully'
             />
-            <Form.Button onClick={this.handleSubmit} primary>Login</Form.Button>
+            <Form.Button onClick={this.handleSubmit} primary>Change Password</Form.Button>
           </Form>
         </Container>
       </div>
@@ -121,4 +125,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage
+export default PasswordResetFulfilPage

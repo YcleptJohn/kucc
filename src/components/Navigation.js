@@ -47,7 +47,7 @@ class Navigation extends Component {
     }
     return (
       <Menu inverted pointing secondary>
-        <Image as={Link} to='/' className='nav-logo' src='img/logo.png' onClick={this.handleLogoClick} />
+        <Image as={Link} to='/' className='nav-logo' src='/img/logo.png' onClick={this.handleLogoClick} />
         <Menu.Item as={Link} to='/' name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick} />
         <Menu.Item name='about' active={this.state.activeItem === 'about'} onClick={this.handleItemClick} />
         <Menu.Item as={Link} to='/trips' name='trips' active={this.state.activeItem === 'trips'} onClick={this.handleItemClick} />
@@ -74,7 +74,7 @@ class Navigation extends Component {
           {this.props.children}
         </Responsive>
         <Responsive as={Segment} basic maxWidth={799} inverted fixed='top'>
-          <Image className='nav-logo-mobile' size='tiny' floated='left' src='img/logo.png' />
+          <Image className='nav-logo-mobile' size='tiny' floated='left' src='/img/logo.png' />
           <Button icon='sidebar' floated='right' onClick={this.toggleMobileSidebar} /><br /><br />
         </Responsive>
         <Responsive maxWidth={799}>
