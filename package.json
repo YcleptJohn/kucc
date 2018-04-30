@@ -13,7 +13,8 @@
     "build:semantic": "cd node_modules/../semantic && gulp build && cd - && echo ✔ Generated semantic themes and updated dist",
     "build:all-dev": "npm run build:semantic && npm run build:less && npm run build:wp-dev",
     "build:all-prod": "npm run build:semantic && npm run build:less && npm run build:wp-prod",
-    "lint": "node_modules/.bin/standard src/**/*.js && echo Linting passed 🎉"
+    "lint": "node_modules/.bin/standard src/**/*.js && echo Linting passed 🎉",
+    "lint:fix": "node_modules/.bin/standard src/**/*.js --fix && echo Linting fixed 🎉"
   },
   "repository": {
     "type": "git",
@@ -41,12 +42,17 @@
     "webpack-cli": "^2.0.12"
   },
   "dependencies": {
+    "cookie-session": "2.0.0-beta.3",
     "del": "^3.0.0",
     "express": "^4.16.2",
+    "moment": "2.22.0",
+    "mysql": "2.15.0",
+    "nodemailer": "4.6.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "semantic-ui-react": "0.77.2",
-    "standard": "11.0.1"
+    "standard": "11.0.1",
+    "universal-cookie": "2.1.2"
   }
 }
