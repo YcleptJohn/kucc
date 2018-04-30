@@ -79,6 +79,7 @@ class LoginPage extends Component {
         } else if (response === 'OK' || response === 'Already logged in') {
           this.setState({ formErrors: [] })
           this.setState({ successfulSubmission: true })
+          this.props.updateLoginState()
         } else {
           this.setState({ formErrors: [response] })
           this.setState({ successfulSubmission: false })

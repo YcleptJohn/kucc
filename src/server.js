@@ -30,6 +30,16 @@ app.route('/api/*')
 
 require('./api/users.js')
 
+app.get('/logout', (req, res, next) => {
+  if (req.session && req.session.user) delete req.session.user
+  return res.redirect('/')
+})
+
+app.get('/mem/example', (req, res, next) => {
+  if (!req.session.user) return res.redirect('/')
+  next()
+})
+
 app.get('*', (req, res) => {
   return res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'))
 })

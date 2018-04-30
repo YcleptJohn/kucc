@@ -52,6 +52,7 @@
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "semantic-ui-react": "0.77.2",
-    "standard": "11.0.1"
+    "standard": "11.0.1",
+    "universal-cookie": "2.1.2"
   }
 }

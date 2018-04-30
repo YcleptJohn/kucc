@@ -14,6 +14,16 @@ import PasswordResetFulfilPage from './PasswordResetFulfilPage.js'
 import PasswordResetRequestPage from './PasswordResetRequestPage.js'
 
 class Router extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {}
+    this.registerLoginStateListenerFn = this.registerLoginStateListenerFn.bind(this)
+  }
+
+  registerLoginStateListenerFn (fn) {
+    this.state.loginStateListenerFn = fn
+  }
+
   render () {
     if (config.HIDE_SITE) {
       return (
@@ -26,12 +36,12 @@ class Router extends Component {
     } else {
       return (
         <div>
-          <Navigation>
+          <Navigation registerLoginStateListenerFn={this.registerLoginStateListenerFn}>
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route exact path='/trips' component={TripsPage} />
               <Route exact path='/signup' component={SignUpPage} />
-              <Route exact path='/login' component={LoginPage} />
+              <Route exact path='/login' render={() => <LoginPage updateLoginState={this.state.loginStateListenerFn} />} />
               <Route path='/reset/:tokenId' component={PasswordResetFulfilPage} />
               <Route path='/reset' component={PasswordResetRequestPage} />
               <Route path='/comingsoon' component={MaintenancePage} />

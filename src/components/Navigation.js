@@ -1,21 +1,40 @@
 import React, { Component } from 'react'
-import { Button, Container, Menu, Segment, Image, Responsive, Sidebar, Divider } from 'semantic-ui-react'
+import { Button, Container, Menu, Segment, Image, Responsive, Sidebar, Divider, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import Cookies from 'universal-cookie'
+const cookies = new Cookies()
 
 class Navigation extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     this.state = {
       activeItem: 'home',
       mobileLogoRedirect: false,
-      showMobileSidebar: false,
-      children: this.props.children
+      showMobileSidebar: false
     }
     this.handleItemClick = this.handleItemClick.bind(this)
     this.handleLogoClick = this.handleLogoClick.bind(this)
     this.toggleMobileSidebar = this.toggleMobileSidebar.bind(this)
     this.getMenuMarkup = this.getMenuMarkup.bind(this)
+    this.updateLoginState = this.updateLoginState.bind(this)
+    this.handleLogoutClick = this.handleLogoutClick.bind(this)
+    this.props.registerLoginStateListenerFn(this.updateLoginState)
+  }
+
+  componentWillMount () {
+    this.updateLoginState()
+  }
+
+  updateLoginState () {
+    this.setState({
+      user: cookies.get('kucc') ? JSON.parse(Buffer.from(cookies.get('kucc'), 'base64').toString('utf-8')).user : null
+    })
+  }
+
+  handleLogoutClick () {
+    cookies.remove('kucc')
+    this.updateLoginState()
+    window.location.replace('/logout')
   }
 
   handleItemClick (e, { name }) {
@@ -53,11 +72,20 @@ class Navigation extends Component {
         <Menu.Item name='about' active={this.state.activeItem === 'about'} onClick={this.handleItemClick} />
         <Menu.Item as={Link} to='/trips' name='trips' active={this.state.activeItem === 'trips'} onClick={this.handleItemClick} />
         <Menu.Menu position='right'>
-          <Button.Group>
-            <Button inverted onClick={this.handleItemClick} as={Link} to='/signup'>Sign Up</Button>
-            <Button.Or />
-            <Button inverted color='yellow' onClick={this.handleItemClick} as={Link} to='/login'>Log In</Button>
-          </Button.Group>
+          {
+            this.state.user
+              ? <Dropdown pointing item text='John Taylor'>
+                <Dropdown.Menu>
+                  <Dropdown.Item icon='file archive outline' text='Resources' onClick={() => window.alert('This feature is currently unavailable')} />
+                  <Dropdown.Item icon='log out' text='Log out' onClick={this.handleLogoutClick} />
+                </Dropdown.Menu>
+              </Dropdown>
+              : <Button.Group>
+                <Button inverted onClick={this.handleItemClick} as={Link} to='/signup'>Sign Up</Button>
+                <Button.Or />
+                <Button inverted color='yellow' onClick={this.handleItemClick} as={Link} to='/login'>Log In</Button>
+              </Button.Group>
+          }
         </Menu.Menu>
       </Menu>
     )
@@ -72,7 +100,7 @@ class Navigation extends Component {
               {this.getMenuMarkup('desktop')}
             </Container>
           </Segment>
-          {this.props.children}
+          { this.props.children }
         </Responsive>
         <Responsive as={Segment} basic maxWidth={799} inverted fixed='top'>
           <Image className='nav-logo-mobile' size='tiny' floated='left' src='/img/logo.png' />
@@ -82,7 +110,7 @@ class Navigation extends Component {
           <Sidebar.Pushable as={Segment}>
             {this.getMenuMarkup('mobile')}
             <Sidebar.Pusher>
-              {this.state.children}
+              { this.props.children }
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         </Responsive>
