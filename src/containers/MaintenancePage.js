@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dimmer, Header, Divider, Icon, Message } from 'semantic-ui-react'
+import { Dimmer, Header, Divider, Icon } from 'semantic-ui-react'
 
 class MaintenancePage extends Component {
   render () {

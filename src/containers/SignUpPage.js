@@ -87,7 +87,6 @@ class SignUpPage extends Component {
       curr[k] = this.state.fields[k].value
       Object.assign(formValues, curr)
     })
-    console.log(process.env)
     fetch('/api/user/create', {
       method: 'POST',
       credentials: 'same-origin',
