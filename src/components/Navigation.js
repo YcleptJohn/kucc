@@ -58,10 +58,18 @@ class Navigation extends Component {
           <Menu.Item name='about' active={this.state.activeItem === 'about'} onClick={this.handleItemClick} />
           <Menu.Item as={Link} to='/trips' name='trips' active={this.state.activeItem === 'trips'} onClick={this.handleItemClick} />
           <Divider inverted />
-          <Menu.Menu position='right'>
-            <Menu.Item as={Link} to='/signup' name='sign up' active={this.state.activeItem === 'sign up'} onClick={this.handleItemClick} />
-            <Menu.Item as={Link} to='/login' name='log in' active={this.state.activeItem === 'log in'} onClick={this.handleItemClick} />
-          </Menu.Menu>
+          {
+            this.state.user
+              ? <Menu.Menu position='right'>
+                <Menu.Item header>Logged in as {this.state.user.forename}</Menu.Item>
+                <Menu.Item name='Resources' onClick={() => window.alert('This feature is currently unavailable')} />
+                <Menu.Item name='Log out' onClick={this.handleLogoutClick} />
+              </Menu.Menu>
+              : <Menu.Menu position='right'>
+                <Menu.Item as={Link} to='/signup' name='sign up' active={this.state.activeItem === 'sign up'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to='/login' name='log in' active={this.state.activeItem === 'log in'} onClick={this.handleItemClick} />
+              </Menu.Menu>
+          }
         </Sidebar>
       )
     }
@@ -74,7 +82,7 @@ class Navigation extends Component {
         <Menu.Menu position='right'>
           {
             this.state.user
-              ? <Dropdown pointing item text='John Taylor'>
+              ? <Dropdown pointing item text={this.state.user.forename + ' ' + this.state.user.surname}>
                 <Dropdown.Menu>
                   <Dropdown.Item icon='file archive outline' text='Resources' onClick={() => window.alert('This feature is currently unavailable')} />
                   <Dropdown.Item icon='log out' text='Log out' onClick={this.handleLogoutClick} />
