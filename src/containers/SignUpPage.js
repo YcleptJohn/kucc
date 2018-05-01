@@ -25,7 +25,7 @@ class SignUpPage extends Component {
         kentId: {
           value: '',
           regex: /[a-zA-Z0-9]*/,
-          isValid: false,
+          isValid: true,
           message: 'You must provide a valid Kent ID. (e.g jjt24)'
         },
         email: {
@@ -97,14 +97,14 @@ class SignUpPage extends Component {
     }).then(res => res.text()) // Parse response as text
       .catch(error => console.error('Error:', error))
       .then(response => {
+        this.setState({ isLoading: false })
         if (response !== 'OK') {
           this.setState({ formErrors: [response] })
+          this.setState({ successfulSubmission: false })
         } else {
           this.setState({ formErrors: [] })
           this.setState({ successfulSubmission: true })
         }
-        this.setState({ isLoading: false })
-        this.setState({ successfulSubmission: false })
       })
   }
 
