@@ -1,6 +1,6 @@
 {
   "name": "kucc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The rebuilt KUCC website using Node.js + React",
   "main": "index.js",
   "scripts": {
