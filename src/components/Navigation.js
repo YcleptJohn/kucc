@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Container, Menu, Segment, Image, Responsive, Sidebar, Divider, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import Footer from './Footer.js'
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
@@ -102,13 +103,16 @@ class Navigation extends Component {
   render () {
     return (
       <div>
-        <Responsive minWidth={800}>
+        <Responsive minWidth={800} className='flexWrap'>
           <Segment basic inverted fixed='top'>
             <Container>
               {this.getMenuMarkup('desktop')}
             </Container>
           </Segment>
-          { this.props.children }
+          <div className='contentWrap'>
+            {this.props.children}
+          </div>
+          <Footer />
         </Responsive>
         <Responsive as={Segment} basic maxWidth={799} inverted fixed='top'>
           <Image className='nav-logo-mobile' size='tiny' floated='left' src='/img/logo.png' />
@@ -119,6 +123,7 @@ class Navigation extends Component {
             {this.getMenuMarkup('mobile')}
             <Sidebar.Pusher>
               { this.props.children }
+              <Footer mobile />
             </Sidebar.Pusher>
           </Sidebar.Pushable>
         </Responsive>
