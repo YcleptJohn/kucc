@@ -104,6 +104,7 @@ class SignUpPage extends Component {
         } else {
           this.setState({ formErrors: [] })
           this.setState({ successfulSubmission: true })
+          this.props.updateLoginState()          
         }
       })
   }

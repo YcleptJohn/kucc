@@ -40,7 +40,7 @@ class Router extends Component {
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route exact path='/trips' component={TripsPage} />
-              <Route exact path='/signup' component={SignUpPage} />
+              <Route exact path='/signup' render={() => <SignUpPage updateLoginState={this.state.loginStateListenerFn} />} />
               <Route exact path='/login' render={() => <LoginPage updateLoginState={this.state.loginStateListenerFn} />} />
               <Route path='/reset/:tokenId' component={PasswordResetFulfilPage} />
               <Route path='/reset' component={PasswordResetRequestPage} />
