@@ -118,11 +118,13 @@ class Navigation extends Component {
           <Image className='nav-logo-mobile' size='tiny' floated='left' src='/img/logo.png' />
           <Button icon='sidebar' floated='right' onClick={this.toggleMobileSidebar} /><br /><br />
         </Responsive>
-        <Responsive maxWidth={799}>
+        <Responsive maxWidth={799} className='flexWrap'>
           <Sidebar.Pushable as={Segment}>
             {this.getMenuMarkup('mobile')}
             <Sidebar.Pusher>
-              { this.props.children }
+              <div className='contentWrap'>
+                {this.props.children}
+              </div>
               <Footer mobile />
             </Sidebar.Pusher>
           </Sidebar.Pushable>
