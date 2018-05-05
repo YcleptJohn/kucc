@@ -79,30 +79,28 @@ class PasswordResetRequestPage extends Component {
 
   render () {
     return (
-      <div>
-        <Container as={Segment}>
-          <Header as='h2'>
-            Request Password Reset
-            <Header.Subheader>Please provide your account's email address below to reset the password</Header.Subheader>
-          </Header>
-          <Divider />
-          <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
-            <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
-            <Message
-              error
-              floating
-              header='Something went wrong with your submission:'
-              list={this.state.formErrors}
-            />
-            <Message
-              success
-              floating
-              header='Password reset email sent. It should arrive shortly.'
-            />
-            <Form.Button onClick={this.handleSubmit} primary>Request Reset</Form.Button>
-          </Form>
-        </Container>
-      </div>
+      <Container as={Segment}>
+        <Header as='h2'>
+          Request Password Reset
+          <Header.Subheader>Please provide your account's email address below to reset the password</Header.Subheader>
+        </Header>
+        <Divider />
+        <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
+          <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
+          <Message
+            error
+            floating
+            header='Something went wrong with your submission:'
+            list={this.state.formErrors}
+          />
+          <Message
+            success
+            floating
+            header='Password reset email sent. It should arrive shortly.'
+          />
+          <Form.Button onClick={this.handleSubmit} primary>Request Reset</Form.Button>
+        </Form>
+      </Container>
     )
   }
 }

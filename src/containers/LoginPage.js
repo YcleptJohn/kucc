@@ -90,31 +90,29 @@ class LoginPage extends Component {
 
   render () {
     return (
-      <div>
-        <Container as={Segment}>
-          <Header as='h2'>
-            Login
-            <Header.Subheader>Fill out the form below to sign in to your account</Header.Subheader>
-          </Header>
-          <Divider />
-          <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
-            <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
-            <Form.Input fluid label='Password' type='password' placeholder='Password...' id='password' onChange={this.handleChange} />
-            <Message
-              error
-              floating
-              header='Something went wrong with your submission:'
-              list={this.state.formErrors} />
-            <Message
-              success
-              floating
-              icon='checkmark'
-              header='Logged in successfully'
-            />
-            <Form.Button onClick={this.handleSubmit} primary>Login</Form.Button>
-          </Form>
-        </Container>
-      </div>
+      <Container as={Segment}>
+        <Header as='h2'>
+          Login
+          <Header.Subheader>Fill out the form below to sign in to your account</Header.Subheader>
+        </Header>
+        <Divider />
+        <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
+          <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
+          <Form.Input fluid label='Password' type='password' placeholder='Password...' id='password' onChange={this.handleChange} />
+          <Message
+            error
+            floating
+            header='Something went wrong with your submission:'
+            list={this.state.formErrors} />
+          <Message
+            success
+            floating
+            icon='checkmark'
+            header='Logged in successfully'
+          />
+          <Form.Button onClick={this.handleSubmit} primary>Login</Form.Button>
+        </Form>
+      </Container>
     )
   }
 }

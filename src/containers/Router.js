@@ -27,28 +27,24 @@ class Router extends Component {
   render () {
     if (config.HIDE_SITE) {
       return (
-        <div>
-          <Switch>
-            <Route path='*' component={MaintenancePage} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path='*' component={MaintenancePage} />
+        </Switch>
       )
     } else {
       return (
-        <div>
-          <Navigation registerLoginStateListenerFn={this.registerLoginStateListenerFn}>
-            <Switch>
-              <Route exact path='/' component={HomePage} />
-              <Route exact path='/trips' component={TripsPage} />
-              <Route exact path='/signup' render={() => <SignUpPage updateLoginState={this.state.loginStateListenerFn} />} />
-              <Route exact path='/login' render={() => <LoginPage updateLoginState={this.state.loginStateListenerFn} />} />
-              <Route path='/reset/:tokenId' component={PasswordResetFulfilPage} />
-              <Route path='/reset' component={PasswordResetRequestPage} />
-              <Route path='/comingsoon' component={MaintenancePage} />
-              <Route path='/test' component={ThemingLayout} />
-            </Switch>
-          </Navigation>
-        </div>
+        <Navigation registerLoginStateListenerFn={this.registerLoginStateListenerFn}>
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/trips' component={TripsPage} />
+            <Route exact path='/signup' render={() => <SignUpPage updateLoginState={this.state.loginStateListenerFn} />} />
+            <Route exact path='/login' render={() => <LoginPage updateLoginState={this.state.loginStateListenerFn} />} />
+            <Route path='/reset/:tokenId' component={PasswordResetFulfilPage} />
+            <Route path='/reset' component={PasswordResetRequestPage} />
+            <Route path='/comingsoon' component={MaintenancePage} />
+            <Route path='/test' component={ThemingLayout} />
+          </Switch>
+        </Navigation>
       )
     }
   }

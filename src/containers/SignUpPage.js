@@ -111,37 +111,35 @@ class SignUpPage extends Component {
 
   render () {
     return (
-      <div>
-        <Container as={Segment}>
-          <Header as='h2'>
-            Create Account
-            <Header.Subheader>Fill out the form below to create your account</Header.Subheader>
-          </Header>
-          <Divider />
-          <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
-            <Form.Group widths='equal'>
-              <Form.Input fluid label='First name' placeholder='First name...' id='forename' onChange={this.handleChange} autoComplete='given-name' />
-              <Form.Input fluid label='Last name' placeholder='Last name...' id='surname' onChange={this.handleChange} autoComplete='family-name' />
-              <Form.Input fluid label='Kent ID' placeholder='e.g jjt24' id='kentId' onChange={this.handleChange} />
-            </Form.Group>
-            <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
-            <Form.Input fluid label='Password' type='password' placeholder='Password...' id='password' onChange={this.handleChange} />
-            <Form.Input fluid label='Confirm Password' type='password' placeholder='Retype password...' id='confirmPassword' onChange={this.handleChange} />
-            <Message
-              error
-              floating
-              header='Something went wrong with your submission:'
-              list={this.state.formErrors}
-            />
-            <Message
-              success
-              floating
-              header='Account created succesfully'
-            />
-            <Form.Button onClick={this.handleSubmit} primary>Create Account</Form.Button>
-          </Form>
-        </Container>
-      </div>
+      <Container as={Segment}>
+        <Header as='h2'>
+          Create Account
+          <Header.Subheader>Fill out the form below to create your account</Header.Subheader>
+        </Header>
+        <Divider />
+        <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
+          <Form.Group widths='equal'>
+            <Form.Input fluid label='First name' placeholder='First name...' id='forename' onChange={this.handleChange} autoComplete='given-name' />
+            <Form.Input fluid label='Last name' placeholder='Last name...' id='surname' onChange={this.handleChange} autoComplete='family-name' />
+            <Form.Input fluid label='Kent ID' placeholder='e.g jjt24' id='kentId' onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Input fluid label='Email' placeholder='Email...' id='email' onChange={this.handleChange} autoComplete='email' />
+          <Form.Input fluid label='Password' type='password' placeholder='Password...' id='password' onChange={this.handleChange} />
+          <Form.Input fluid label='Confirm Password' type='password' placeholder='Retype password...' id='confirmPassword' onChange={this.handleChange} />
+          <Message
+            error
+            floating
+            header='Something went wrong with your submission:'
+            list={this.state.formErrors}
+          />
+          <Message
+            success
+            floating
+            header='Account created succesfully'
+          />
+          <Form.Button onClick={this.handleSubmit} primary>Create Account</Form.Button>
+        </Form>
+      </Container>
     )
   }
 }

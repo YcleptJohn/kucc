@@ -93,31 +93,29 @@ class PasswordResetFulfilPage extends Component {
 
   render () {
     return (
-      <div>
-        <Container as={Segment}>
-          <Header as='h2'>
-            Change Password
-            <Header.Subheader>Please supply a new password for your account below</Header.Subheader>
-          </Header>
-          <Divider />
-          <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
-            <Form.Input fluid label='Password' type='password' placeholder='Password...' id='newPassword' onChange={this.handleChange} />
-            <Form.Input fluid label='Confirm Password' type='password' placeholder='Retype password...' id='confirmNewPassword' onChange={this.handleChange} />
-            <Message
-              error
-              floating
-              header='Something went wrong with your submission:'
-              list={this.state.formErrors}
-            />
-            <Message
-              success
-              floating
-              header='Password reset successfully'
-            />
-            <Form.Button onClick={this.handleSubmit} primary>Change Password</Form.Button>
-          </Form>
-        </Container>
-      </div>
+      <Container as={Segment}>
+        <Header as='h2'>
+          Change Password
+          <Header.Subheader>Please supply a new password for your account below</Header.Subheader>
+        </Header>
+        <Divider />
+        <Form loading={this.state.isLoading} error={this.state.formErrors.length > 0} success={this.state.successfulSubmission}>
+          <Form.Input fluid label='Password' type='password' placeholder='Password...' id='newPassword' onChange={this.handleChange} />
+          <Form.Input fluid label='Confirm Password' type='password' placeholder='Retype password...' id='confirmNewPassword' onChange={this.handleChange} />
+          <Message
+            error
+            floating
+            header='Something went wrong with your submission:'
+            list={this.state.formErrors}
+          />
+          <Message
+            success
+            floating
+            header='Password reset successfully'
+          />
+          <Form.Button onClick={this.handleSubmit} primary>Change Password</Form.Button>
+        </Form>
+      </Container>
     )
   }
 }
