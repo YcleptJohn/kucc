@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, List, Modal, Header, Button, Icon } from 'semantic-ui-react'
+import { Segment, List, Modal, Header, Button, Icon, Image } from 'semantic-ui-react'
 
 class Footer extends Component {
   constructor (props) {
@@ -27,12 +27,58 @@ class Footer extends Component {
 
   getContactUsModal () {
     return (
-      <Modal open={this.state.showContactUs} onClose={() => { this.close('ContactUs') }} dimmer='blurring'>
+      <Modal open={this.state.showContactUs} onClose={() => { this.close('ContactUs') }}>
         <Modal.Header>Contact Us <Icon name='comments' /></Modal.Header>
         <Modal.Content scrolling>
           <Modal.Description>
-            <Header>Modal Header</Header>
-            <p>Text</p>
+            <Header>Email</Header>
+            <List>
+              <List.Item>
+                <Image avatar src='https://www.w3schools.com/howto/img_avatar.png' />
+                <List.Content>
+                  <List.Header as='a' href='mailto:tripsec@kentcaving.co.uk'>President</List.Header>
+                  <List.Description>
+                    John Taylor
+                  </List.Description>
+                </List.Content>
+              </List.Item>
+              <List.Item>
+                <Image avatar src='https://www.w3schools.com/howto/img_avatar.png' />
+                <List.Content>
+                  <List.Header as='a' href='mailto:tripsec@kentcaving.co.uk'>Secretary</List.Header>
+                  <List.Description>
+                    Elif Okutan
+                  </List.Description>
+                </List.Content>
+              </List.Item>
+              <List.Item>
+                <Image avatar src='https://www.w3schools.com/howto/img_avatar.png' />
+                <List.Content>
+                  <List.Header as='a' href='mailto:tripsec@kentcaving.co.uk'>Trip Secretary</List.Header>
+                  <List.Description>
+                    Helen Felemegos
+                  </List.Description>
+                </List.Content>
+              </List.Item>
+              <List.Item>
+                <Image avatar src='https://www.w3schools.com/howto/img_avatar.png' />
+                <List.Content>
+                  <List.Header as='a' href='mailto:tripsec@kentcaving.co.uk'>Social Secretary</List.Header>
+                  <List.Description>
+                    Thomas Mcneil
+                  </List.Description>
+                </List.Content>
+              </List.Item>
+              <List.Item>
+                <Image avatar src='https://www.w3schools.com/howto/img_avatar.png' />
+                <List.Content>
+                  <List.Header as='a' href='mailto:tripsec@kentcaving.co.uk'>Treasurer</List.Header>
+                  <List.Description>
+                    Alex Colenutt
+                  </List.Description>
+                </List.Content>
+              </List.Item>
+            </List>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
@@ -46,7 +92,7 @@ class Footer extends Component {
 
   getPrivacyPolicyModal () {
     return (
-      <Modal open={this.state.showPrivacyPolicy} onClose={() => { this.close('PrivacyPolicy') }} dimmer='blurring'>
+      <Modal open={this.state.showPrivacyPolicy} onClose={() => { this.close('PrivacyPolicy') }}>
         <Modal.Header>Privacy Policy <Icon name='spy' /></Modal.Header>
         <Modal.Content scrolling>
           <Modal.Description>
@@ -71,7 +117,7 @@ class Footer extends Component {
 
   getTermsModal () {
     return (
-      <Modal open={this.state.showTerms} onClose={() => { this.close('Terms') }} dimmer='blurring'>
+      <Modal open={this.state.showTerms} onClose={() => { this.close('Terms') }}>
         <Modal.Header>Terms &amp; Conditions <Icon name='law' /></Modal.Header>
         <Modal.Content scrolling>
           <Modal.Description>
@@ -95,13 +141,13 @@ class Footer extends Component {
     return (
       <Segment inverted textAlign='center'>
         <List inverted horizontal divided relaxed>
-          <List.Item onClick={() => { this.open('ContactUs') }}>
+          <List.Item className='underline-hover' onClick={() => { this.open('ContactUs') }}>
             Contact Us
           </List.Item>
-          <List.Item onClick={() => { this.open('PrivacyPolicy') }}>
+          <List.Item className='underline-hover' onClick={() => { this.open('PrivacyPolicy') }}>
             Privacy Policy
           </List.Item>
-          <List.Item onClick={() => { this.open('Terms') }}>
+          <List.Item className='underline-hover' onClick={() => { this.open('Terms') }}>
             {this.props.mobile ? 'Terms' : 'Terms and Conditions'}
           </List.Item>
         </List>
