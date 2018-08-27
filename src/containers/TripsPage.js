@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import fetch from 'isomorphic-fetch'
-import Trip from '../components/Trip.js'
+import TripTile from '../components/Trip.js'
 import { Container, Segment, Item, Divider } from 'semantic-ui-react'
 
 class TripsPage extends Component {
@@ -60,11 +60,11 @@ class TripsPage extends Component {
       <Container as={Segment}>
         <Divider horizontal>Autumn Term</Divider>
         <Item.Group>
-          {this.state.data.trips.map((trip, i) => <Trip key={i} data={trip} isLast={i === (this.state.data.trips.length - 1)} />)}
+          {this.state.data.trips.map((trip, i) => <TripTile key={i} data={trip} isLast={i === (this.state.data.trips.length - 1)}/>)}
         </Item.Group>
         <Divider horizontal>Spring Term</Divider>
         <Item.Group>
-          {this.state.data.trips.map((trip, i) => <Trip key={i} data={trip} isLast={i === (this.state.data.trips.length - 1)} />)}
+          {this.state.data.trips.map((trip, i) => <TripTile key={i} data={trip} isLast={i === (this.state.data.trips.length - 1)}/>)}
         </Item.Group>
       </Container>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Item, Button, Icon, Grid, Divider, Header, Responsive } from 'semantic-ui-react'
 
-class Trip extends Component {
+class TripTile extends Component {
   render () {
     const { data } = this.props
     // fixtureId
@@ -35,7 +35,7 @@ class Trip extends Component {
             </Item.Description>
             <Header as={'h6'} textAlign='center'>Signups open 28th may</Header>
             <Item.Extra>
-              <Button positive fluid disabled>
+              <Button positive fluid>
                 Sign Up
                 <Icon name='right chevron' />
               </Button>
@@ -71,7 +71,7 @@ class Trip extends Component {
                   {data.description}
                 </Grid.Column>
                 <Grid.Column width={2}>
-                  <Button positive floated='right' disabled>
+                  <Button positive floated='right'>
                     Sign Up
                     <Icon name='right chevron' />
                   </Button>
@@ -91,4 +91,4 @@ class Trip extends Component {
   }
 }
 
-export default Trip
+export default TripTile
