@@ -2,7 +2,6 @@ const express = require('express')
 const cookieSession = require('cookie-session')
 const path = require('path')
 const config = require('../config.js')
-const database = require('./lib/database.js')
 
 const app = module.exports = express() // Export the express module for ease of route definition from other files
 app.set('trust proxy', 1)
@@ -28,6 +27,7 @@ app.route('/api/*')
   })
 
 require('./api/users.js')
+require('./api/fixtures.js')
 
 app.get('/logout', (req, res, next) => {
   if (req.session && req.session.user) delete req.session.user
