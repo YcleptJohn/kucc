@@ -7,6 +7,7 @@ import { Button, Container, Divider, Grid, Header, Image, Menu, Segment } from '
 import MaintenancePage from './MaintenancePage.js'
 import HomePage from './HomePage.js'
 import TripsPage from './TripsPage.js'
+import TripSignupPage from './TripSignupPage.js'
 import Navigation from '../components/Navigation.js'
 import SignUpPage from './SignUpPage.js'
 import LoginPage from './LoginPage.js'
@@ -37,6 +38,7 @@ class Router extends Component {
           <Switch>
             <Route exact path='/' component={HomePage} />
             <Route exact path='/trips' component={TripsPage} />
+            <Route path='/trips/signup/:tripId' component={TripSignupPage} />
             <Route exact path='/signup' render={() => <SignUpPage updateLoginState={this.state.loginStateListenerFn} />} />
             <Route exact path='/login' render={() => <LoginPage updateLoginState={this.state.loginStateListenerFn} />} />
             <Route path='/reset/:tokenId' component={PasswordResetFulfilPage} />

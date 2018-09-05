@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Item, Button, Icon, Grid, Divider, Header, Responsive } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class TripTile extends Component {
   render () {
@@ -27,8 +28,8 @@ class TripTile extends Component {
             </Item.Header>
             <Item.Meta>
               <Icon name='globe' /> Mendip Hills, Somerset<br />
-              <Icon name='calendar' /> 25th Aug '18 - 27th Aug '18<br />
-              <Icon name='pound' /> {data.costDescription}<br />
+              <Icon name='calendar' color='blue'/> 25th Aug '18 - 27th Aug '18<br />
+              <Icon name='pound' color='green' /> {data.costDescription}<br />
             </Item.Meta>
             <Item.Description>
               {data.description}
@@ -71,7 +72,7 @@ class TripTile extends Component {
                   {data.description}
                 </Grid.Column>
                 <Grid.Column width={2}>
-                  <Button positive floated='right'>
+                  <Button positive floated='right' as={Link} to={`trips/signup/${data.fixtureId}`}>
                     Sign Up
                     <Icon name='right chevron' />
                   </Button>

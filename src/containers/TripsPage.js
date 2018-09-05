@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import fetch from 'isomorphic-fetch'
-import TripTile from '../components/Trip.js'
+import TripTile from '../components/TripTile.js'
 import { Container, Segment, Item, Divider } from 'semantic-ui-react'
 
 class TripsPage extends Component {
