@@ -6,6 +6,7 @@ import { Button, Container, Divider, Grid, Header, Image, Menu, Segment } from '
 
 import MaintenancePage from './MaintenancePage.js'
 import HomePage from './HomePage.js'
+import CommitteePage from './CommitteePage.js'
 import TripsPage from './TripsPage.js'
 import Navigation from '../components/Navigation.js'
 import SignUpPage from './SignUpPage.js'
@@ -36,6 +37,7 @@ class Router extends Component {
         <Navigation registerLoginStateListenerFn={this.registerLoginStateListenerFn}>
           <Switch>
             <Route exact path='/' component={HomePage} />
+            <Route exact path='/committee' component={CommitteePage} />
             <Route exact path='/trips' component={TripsPage} />
             <Route exact path='/signup' render={() => <SignUpPage updateLoginState={this.state.loginStateListenerFn} />} />
             <Route exact path='/login' render={() => <LoginPage updateLoginState={this.state.loginStateListenerFn} />} />

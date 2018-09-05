@@ -9,7 +9,7 @@ class Navigation extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeItem: 'home',
+      activeItem: 'n/a',
       mobileLogoRedirect: false,
       showMobileSidebar: false
     }
@@ -57,6 +57,7 @@ class Navigation extends Component {
         <Sidebar as={Menu} animation='slide along' width='thin' visible={this.state.showMobileSidebar} icon='labeled' vertical inverted borderless>
           <Menu.Item as={Link} to='/' name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick} />
           <Menu.Item name='about' active={this.state.activeItem === 'about'} onClick={this.handleItemClick} />
+          <Menu.Item as={Link} to='/committee' name='committee' active={this.state.activeItem === 'committee'} onClick={this.handleItemClick} />
           <Menu.Item as={Link} to='/trips' name='trips' active={this.state.activeItem === 'trips'} onClick={this.handleItemClick} />
           <Divider inverted />
           {
@@ -79,6 +80,7 @@ class Navigation extends Component {
         <Image as={Link} to='/' className='nav-logo' src='/img/logo.png' onClick={this.handleLogoClick} />
         <Menu.Item as={Link} to='/' name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick} />
         <Menu.Item name='about' active={this.state.activeItem === 'about'} onClick={this.handleItemClick} />
+        <Menu.Item as={Link} to='/committee' name='committee' active={this.state.activeItem === 'committee'} onClick={this.handleItemClick} />
         <Menu.Item as={Link} to='/trips' name='trips' active={this.state.activeItem === 'trips'} onClick={this.handleItemClick} />
         <Menu.Menu position='right'>
           {
