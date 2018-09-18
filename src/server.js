@@ -28,6 +28,7 @@ app.route('/api/*')
 
 require('./api/users.js')
 require('./api/fixtures.js')
+require('./api/payment.js')
 
 app.get('/logout', (req, res, next) => {
   if (req.session && req.session.user) delete req.session.user

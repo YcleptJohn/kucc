@@ -18,7 +18,7 @@ class TripsPage extends Component {
   async componentWillMount () {
     let res
     try {
-      res = await fetch('/api/fixtures/getAll')
+      res = await fetch('/api/fixtures/getAll?token=' + process.env.API_TOKEN)
       if (res.status !== 200) throw new Error('API request failed')
       let arr = await res.json()
       this.setState({
